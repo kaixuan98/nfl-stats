@@ -3,7 +3,7 @@
 # sets the base image as official python image 
 FROM python:3.12
 
-# create a working directory for the code
+# create a working directory inside the container
 WORKDIR /code/nfl-stats
 
 # install all the packages
