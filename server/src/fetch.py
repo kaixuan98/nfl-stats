@@ -1,17 +1,26 @@
 import requests 
 from bs4 import BeautifulSoup
 
-NFL_STATS_URL = "https://www.teamrankings.com/nfl/stat/"
-offense_stats_list = [
-   "points-per-game",  
-   "passing-yard-per-game",
-   "rushing-yard-per-game",
-   "yards-per-game"
-]
-
-def get_url_data():
-    data = requests.get(NFL_STATS_URL + offense_stats_list[0]).text
+# link to raw data
+def get_single_url_table(link):
+    data = requests.get(link).text
     soup = BeautifulSoup(data, 'html.parser')
     found_table = soup.find('table', class_='tr-table datatable scrollable')
-    print(found_table)
     return found_table
+
+# raw data to a dictionary
+def extract_data_from_html(raw_table):
+   headers = [header.text.strip() for header in raw_table.find_all('th')]
+   rows = raw_table.find_all("tr")
+   clean_rows = []
+   for row in rows: 
+      cols = row.find_all('td')
+      cols = [ele.text.strip() for ele in cols]
+      if len(cols) > 0:
+         clean_rows.append(cols)
+   return {"headers": headers, "rows": clean_rows}
+
+# write data to a file 
+def write_data_to_csv(raw_data, data_name, location):
+   return
+
