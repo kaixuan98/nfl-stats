@@ -16,9 +16,7 @@ services:
     ports:
       - 8000:8000
     volumes: 
-      - type: bind
-        source: /Code/nfl-stats
-        target: /Code/nfl-stats
+      - /Users/kaixuanchin/Code/nfl-stats/server:/code/nfl-stats
 
 # The commented out section below is an example of how to define a PostgreSQL
 # database that your application can use. `depends_on` tells Docker Compose to
