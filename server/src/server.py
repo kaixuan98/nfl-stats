@@ -1,5 +1,5 @@
 from flask import Flask
-from fetch import get_single_url_table, extract_data_from_html
+from fetch import get_data_soup, get_date, get_table, extract_data_from_html
 app = Flask(__name__)
 
 
@@ -20,11 +20,25 @@ defense_stats_list = [
    "opponent-red-zone-scoring-pct"
 ]
 
-@app.route('/')
-def start():
-    raw_table = get_single_url_table(NFL_STATS_URL + offense_stats_list[0])
-    extracted_data = extract_data_from_html(raw_table)
-    return '<h1>Hello from Flask & Docker</h2>'
+@app.route('/nfl/offense')
+def get_offense():
+    # offense 
+    for link in offense_stats_list: 
+        soup = get_data_soup(NFL_STATS_URL + link)
+        raw_table = get_table(soup)
+        data_date = get_date(soup)
+        extracted_data = extract_data_from_html(raw_table)
+    return '<h1>Offense Data</h1>'
+
+@app.route('/nfl/defense')
+def get_deffense():
+    for link in defense_stats_list: 
+        soup = get_data_soup(NFL_STATS_URL + link)
+        raw_table = get_table(soup)
+        data_date = get_date(soup)
+        extracted_data = extract_data_from_html(raw_table)
+    return '<h1>Deffense Datas</h2>'
+
 
 
 if __name__ == "__main__":
