@@ -2,11 +2,21 @@
 
 # sets the base image as official python image 
 FROM python:3.12
-WORKDIR /nfl-stats
+
+# create a working directory inside the container
+WORKDIR /code/nfl-stats
+
+# install all the packages
 COPY requirements.txt .
 RUN pip install -r requirements.txt
-EXPOSE 8000
+
+# copy your application files to the current directory
 COPY . .
+
+# expose the port 
+EXPOSE 8000
+
+# command to run the startup script
 CMD [ "python", "src/server.py"]
 
 
