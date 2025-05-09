@@ -4,3 +4,5 @@ python-dotenv
 flask
 pandas
 numpy
+supabase
+boto3
