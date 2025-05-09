@@ -9,7 +9,8 @@ def get_data_soup(link):
     return soup
 
 def get_date(soup): 
-   found_date = soup.find('input', class_='custom-date')
+   date_html = soup.find('input', class_='custom-date')
+   found_date = date_html["value"]
    return found_date
 
 # link to raw data
@@ -30,7 +31,10 @@ def extract_data_from_html(raw_table):
          clean_rows.append(cols)
    return {"headers": headers, "rows": clean_rows}
 
-# write data to a file 
+# write data to a json 
 def write_data_to_csv(raw_data, data_name, location):
    return
 
+
+# save json to postgres for record keeping
+#file name conventions: sports type + sources + date
