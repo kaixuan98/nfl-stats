@@ -1,10 +1,10 @@
 from flask import Flask, jsonify
 from dotenv import load_dotenv
-from src.fetch import get_data_soup, get_date, get_table, extract_data_from_html
-from src.store import supabase
+from server.src.fetch import get_data_soup, get_date, get_table, extract_data_from_html
+from server import create_app
 
 load_dotenv()
-app = Flask(__name__)
+app = create_app()
 
 
 NFL_STATS_URL = "https://www.teamrankings.com/nfl/stat/"
@@ -46,13 +46,6 @@ def get_deffense():
         print(extracted_data)
     return '<h1>Deffense Datas</h2>'
 
-@app.route('/accessDB')
-def get_data():
-    try:
-        response = supabase.table("sports").select("*").execute()
-        return jsonify(response.data)
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
     
 
 
