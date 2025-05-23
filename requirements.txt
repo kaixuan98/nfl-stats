@@ -6,3 +6,4 @@ pandas
 numpy
 supabase
 boto3
+scrapy
