@@ -17,7 +17,7 @@ COPY . .
 EXPOSE 8000
 
 # command to run the startup script
-CMD [ "python", "src/server.py"]
+CMD [ "python", "server.py"]
 
 
 
