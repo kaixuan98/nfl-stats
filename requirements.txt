@@ -1,9 +1,0 @@
-requests
-beautifulsoup4
-python-dotenv
-flask
-pandas
-numpy
-supabase
-boto3
-scrapy
